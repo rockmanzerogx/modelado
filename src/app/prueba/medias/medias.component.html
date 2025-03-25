@@ -1,0 +1,54 @@
+<h2>Prueba de Medias</h2>
+<input type="file" (change)="cargarExcel($event)" />
+<br /><br />
+<label for="columna">Selecciona la columna a trabajar:</label>
+<input 
+  id="columna" 
+  type="number" 
+  [(ngModel)]="columnaSeleccionada" 
+  (change)="actualizarColumna()" 
+/>
+<br /><br />
+<label for="decimales">Número de decimales:</label>
+<input 
+  id="decimales" 
+  type="number" 
+  [(ngModel)]="decimales" 
+/>
+<br /><br />
+<label for="confianza">Índice de confianza (entre 0 y 1):</label>
+<input 
+  id="confianza" 
+  type="number" 
+  step="0.01" 
+  [(ngModel)]="indiceConfianza" 
+/>
+<br /><br />
+
+<h3>Datos de la columna seleccionada:</h3>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Fila</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dato of datosColumna; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ dato.toFixed(decimales) }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="pruebaDeMedias()">Calcular Media e Intervalo</button>
+
+<div *ngIf="resultado !== null">
+  <p>Media calculada: {{ resultado }}</p>
+  <p>Límite Inferior: {{ limiteInferior }}</p>
+  <p>Límite Superior: {{ limiteSuperior }}</p>
+  <p *ngIf="estadisticoDentroDelRango; else fueraRango">El estadístico está dentro del rango.</p>
+  <ng-template #fueraRango>
+    <p>El estadístico está fuera del rango.</p>
+  </ng-template>
+</div>
