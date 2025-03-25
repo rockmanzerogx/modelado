@@ -1,0 +1,70 @@
+<div class="container">
+  <h1>Generador Lineal Congruencial</h1>
+  <form [formGroup]="form" (ngSubmit)="calculate()">
+    <div class="form-group">
+      <label for="seed">Semilla (x<sub>0</sub>):</label>
+      <input
+        id="seed"
+        type="number"
+        formControlName="seed"
+        required
+      />
+      <div class="error-box" *ngIf="form.get('seed')?.hasError('min')">
+        La semilla no puede ser negativa.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="k">Constante (k):</label>
+      <input
+        id="k"
+        type="number"
+        formControlName="k"
+        required
+      />
+      <div class="error-box" *ngIf="form.get('k')?.hasError('min')">
+        La constante k no puede ser negativa.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="period">Periodo (p):</label>
+      <input
+        id="period"
+        type="number"
+        formControlName="period"
+        required
+      />
+      <div class="error-box" *ngIf="form.get('period')?.hasError('min')">
+        El período debe ser al menos 1.
+      </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid">Generar</button>
+    <button type="button" (click)="clear()">Limpiar</button>
+  </form>
+
+  <div *ngIf="constants" class="constants-box">
+    <h3>Constantes Generadas:</h3>
+    <p><strong>g:</strong> {{ constants.g }} (g = ln(p) / ln(2))</p>
+    <p><strong>m:</strong> {{ constants.m }} (m = 2^g)</p>
+    <p><strong>c:</strong> {{ constants.c }} (c = número primo más cercano a m)</p>
+    <p><strong>a:</strong> {{ constants.a }} (a = 1 + 4k)</p>
+  </div>
+
+  <table *ngIf="results.length > 0">
+    <thead>
+      <tr>
+        <th>Iteración</th>
+        <th>Operación</th>
+        <th>X<sub>j</sub></th>
+        <th>R<sub>j</sub></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{ result.iteration }}</td>
+        <td>{{ result.operation }}</td>
+        <td>{{ result.x }}</td>
+        <td>{{ result.r }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

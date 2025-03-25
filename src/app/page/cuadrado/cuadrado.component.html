@@ -1,0 +1,82 @@
+<div>
+  <h2>Generador de Números Aleatorios (Cuadrados Medios)</h2>
+  <form [formGroup]="form" (ngSubmit)="calcularNumeros()">
+    <label for="semilla">Semilla:</label>
+    <input id="semilla" type="number" formControlName="semilla" />
+    <div *ngIf="form.controls['semilla'].hasError('min')" class="error">
+      La semilla no puede ser un número negativo.
+    </div>
+
+    <label for="numero">Cantidad de números:</label>
+    <input id="numero" type="number" formControlName="numero" />
+    <div *ngIf="form.controls['numero'].hasError('min')" class="error">
+      La cantidad de números no puede ser negativa.
+    </div>
+
+    <label for="digitos">Cantidad de dígitos centrales:</label>
+    <input id="digitos" type="number" formControlName="digitos" />
+    <div *ngIf="form.controls['digitos'].hasError('min')" class="error">
+      La cantidad de dígitos centrales debe ser mayor o igual a 3.
+    </div>
+
+    <button type="submit">Calcular</button>
+    <button type="button" (click)="limpiarCampos()">Limpiar</button>
+  </form>
+
+  <div *ngIf="resultados.length > 0" class="table-container">
+    <h3>Resultados:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Iteración</th>
+          <th>Y<sub>j</sub></th>
+          <th>Operación</th>
+          <th>X<sub>j</sub></th>
+          <th>Resultado</th>
+          <th>R<sub>j</sub></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resultado of resultados" [class.degenerado]="resultado.esDegenerado">
+          <td>{{ resultado.iteracion }}</td>
+          <td>{{ resultado.Yj }}</td>
+          <td>{{ resultado.operacion }}</td>
+          <td>{{ resultado.Xj }}</td>
+          <td>{{ resultado.resultado }}</td>
+          <td>{{ resultado.Rj | number:'1.4-4' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal para mostrar la degeneración -->
+  <div *ngIf="mostrarModal" class="modal">
+    <div class="modal-content">
+      <h3>Degeneración Detectada</h3>
+      <p>La serie se degeneró en la iteración {{ iteracionDegenerada.iteracion }}.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Iteración</th>
+            <th>Y<sub>j</sub></th>
+            <th>Operación</th>
+            <th>X<sub>j</sub></th>
+            <th>Resultado</th>
+            <th>R<sub>j</sub></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ iteracionDegenerada.iteracion }}</td>
+            <td>{{ iteracionDegenerada.Yj }}</td>
+            <td>{{ iteracionDegenerada.operacion }}</td>
+            <td>{{ iteracionDegenerada.Xj }}</td>
+            <td>{{ iteracionDegenerada.resultado }}</td>
+            <td>{{ iteracionDegenerada.Rj | number:'1.4-4' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button (click)="mostrarModal = false">Cerrar</button>
+    </div>
+  </div>
+</div>

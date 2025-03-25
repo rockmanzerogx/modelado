@@ -1,0 +1,116 @@
+/* Estilos de error */
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* Estilo general de botones */
+button {
+  background-color: #2a7ae4;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #1f5bb6;
+}
+
+/* Botón para limpiar */
+button[type="button"] {
+  background-color: #e91e63;
+}
+
+button[type="button"]:hover {
+  background-color: #b71347;
+}
+
+/* Contenedor para la tabla */
+.table-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Estilo general de las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  z-index: 1;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #2a7ae4;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo especial para filas degeneradas */
+tr.degenerado {
+  background-color: #ffe6e6; /* Color rojo suave */
+  color: #d32f2f; /* Texto rojo oscuro */
+  font-weight: bold;
+}
+
+/* Estilos del modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+/* Botón dentro del modal */
+.modal-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2a7ae4;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.modal-content button:hover {
+  background-color: #1f5bb6;
+}
