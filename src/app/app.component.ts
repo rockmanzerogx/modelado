@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +16,8 @@ import { CommonModule } from '@angular/common';
     //MultiplicativoComponent,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

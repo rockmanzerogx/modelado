@@ -41,14 +41,4 @@
   </tbody>
 </table>
 
-<button (click)="pruebaDeMedias()">Calcular Media e Intervalo</button>
-
-<div *ngIf="resultado !== null">
-  <p>Media calculada: {{ resultado }}</p>
-  <p>Límite Inferior: {{ limiteInferior }}</p>
-  <p>Límite Superior: {{ limiteSuperior }}</p>
-  <p *ngIf="estadisticoDentroDelRango; else fueraRango">El estadístico está dentro del rango.</p>
-  <ng-template #fueraRango>
-    <p>El estadístico está fuera del rango.</p>
-  </ng-template>
-</div>
+<button mat-raised-button color="primary" (click)="pruebaDeMedias()">Calcular Media</button>

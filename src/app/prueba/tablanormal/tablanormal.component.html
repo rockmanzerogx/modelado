@@ -1,0 +1,14 @@
+<table>
+    <thead>
+      <tr>
+        <th>Z</th>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td>{{ row.zValue }}</td>
+        <td *ngFor="let value of row.values">{{ value }}</td>
+      </tr>
+    </tbody>
+  </table>
