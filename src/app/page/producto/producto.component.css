@@ -5,7 +5,7 @@
   margin-top: 5px;
 }
 
-/* Botones generales */
+/* Estilo general de botones */
 button {
   background-color: #2a7ae4;
   color: white;
@@ -13,15 +13,13 @@ button {
   padding: 5px 10px;
   cursor: pointer;
   margin-right: 5px;
-  border-radius: 3px;
-  font-size: 0.9em;
 }
 
 button:hover {
   background-color: #1f5bb6;
 }
 
-/* Botón de limpieza */
+/* Botón para limpiar */
 button[type="button"] {
   background-color: #e91e63;
 }
@@ -30,16 +28,13 @@ button[type="button"]:hover {
   background-color: #b71347;
 }
 
-/* Contenedor de la tabla */
+/* Contenedor para la tabla */
 .table-container {
   max-height: 300px;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-top: 10px;
 }
 
-/* Estilo general de la tabla */
+/* Estilo general de las tablas */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -56,13 +51,11 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  font-size: 0.9em;
 }
 
 th {
   background-color: #2a7ae4;
   color: white;
-  font-weight: bold;
 }
 
 tr:nth-child(even) {
@@ -71,54 +64,4 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: #f1f1f1;
-}
-
-/* Fila destacada para degeneración */
-tr.degenerado {
-  background-color: #ffe6e6; /* Fondo rojo claro */
-  color: #d32f2f; /* Texto rojo oscuro */
-  font-weight: bold;
-}
-
-/* Estilo del modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Contenido del modal */
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  max-width: 90%; /* Ancho máximo */
-  max-height: 80%; /* Alto máximo */
-  overflow-y: auto; /* Scroll cuando el contenido es muy grande */
-  text-align: center;
-  font-size: 1em;
-}
-
-/* Botón en el modal */
-.modal-content button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #2a7ae4;
-  color: white;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.modal-content button:hover {
-  background-color: #1f5bb6;
 }

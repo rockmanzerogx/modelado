@@ -13,12 +13,6 @@
       La cantidad de números no puede ser negativa.
     </div>
 
-    <label for="digitos">Cantidad de dígitos centrales:</label>
-    <input id="digitos" type="number" formControlName="digitos" />
-    <div *ngIf="form.controls['digitos'].hasError('min')" class="error">
-      La cantidad de dígitos centrales debe ser mayor o igual a 3.
-    </div>
-
     <button type="submit">Calcular</button>
     <button type="button" (click)="limpiarCampos()">Limpiar</button>
   </form>
@@ -49,7 +43,6 @@
     </table>
   </div>
 
-  <!-- Modal para mostrar la degeneración -->
   <div *ngIf="mostrarModal" class="modal">
     <div class="modal-content">
       <h3>Degeneración Detectada</h3>

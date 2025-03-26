@@ -15,116 +15,77 @@ export class ProductoComponent {
   form: FormGroup;
   resultados: {
     iteracion: number;
-    Y1j: number;
-    Y2j: number;
+    semilla1: number;
+    semilla2: number;
     operacion: string;
-    Xj: number;
+    producto: number;
     resultado: number;
     Rj: number;
-    esDegenerado: boolean; // Identificar degeneración
   }[] = [];
   mensajeError: string = '';
-  mostrarModal: boolean = false; // Control del modal
-  datosDegenerados: any = null; // Datos específicos de degeneración
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       semilla1: [0, [Validators.required, Validators.min(0)]],
       semilla2: [0, [Validators.required, Validators.min(0)]],
-      digitos: [4, [Validators.required, Validators.min(3)]],
-      cantidad: [1, [Validators.required, Validators.min(1)]]
-    });
+      cantidad: [10, [Validators.required, Validators.min(1)]]
+    }, { validators: this.validarLongitudSemillas });
+  }
+
+  validarLongitudSemillas(form: FormGroup) {
+    const semilla1 = form.get('semilla1')?.value.toString();
+    const semilla2 = form.get('semilla2')?.value.toString();
+    if (semilla1 && semilla2 && semilla1.length !== semilla2.length) {
+      return { longitudNoCoincide: true };
+    }
+    return null;
+  }
+
+  contarDigitos(numero: number): number {
+    return numero.toString().length;
   }
 
   calcularNumeros(): void {
     this.mensajeError = '';
-    this.mostrarModal = false; // Reiniciar modal
-    this.datosDegenerados = null; // Reiniciar datos de degeneración
     if (this.form.invalid) {
-      if (this.form.controls['digitos'].hasError('min')) {
-        this.mensajeError = 'La cantidad de dígitos centrales debe ser mayor o igual a 3.';
-      }
+      this.mensajeError = 'Las semillas deben tener la misma longitud y no pueden ser negativas.';
       return;
     }
 
     const semilla1Inicial = this.form.value.semilla1;
     const semilla2Inicial = this.form.value.semilla2;
-    const cantidad = this.form.value.cantidad;
-    const digitosCentrales = this.form.value.digitos;
+    const cantidadNumeros = this.form.value.cantidad;
+    const cantidadDigitos = this.contarDigitos(semilla1Inicial);
 
     let semilla1 = semilla1Inicial;
     let semilla2 = semilla2Inicial;
-    const divisor = Math.pow(10, digitosCentrales);
+    const divisor = Math.pow(10, cantidadDigitos);
     this.resultados = [];
-    const numerosGenerados = new Set();
-    let degeneracionEncontrada = false;
 
-    for (let i = 0; i < cantidad; i++) {
-      const Y1j = semilla1;
-      const Y2j = semilla2;
-      const producto = (semilla1 * semilla2).toString().padStart(digitosCentrales * 2, '0');
-
-      const longitudProducto = producto.length;
-      const inicio = Math.floor((longitudProducto - digitosCentrales) / 2);
-      const fin = inicio + digitosCentrales;
-
-      const Xj = parseInt(producto.substring(inicio, fin), 10);
-      const operacion = `${semilla1} * ${semilla2} = ${producto}`;
-      semilla1 = semilla2; // Actualizar semillas
-      semilla2 = Xj;
-      const resultado = Xj;
-      const Rj = Xj / divisor;
-
-      if (numerosGenerados.has(Xj) && !degeneracionEncontrada) {
-        // Degeneración detectada: mostrar datos en el modal
-        this.mostrarModal = true;
-        this.datosDegenerados = {
-          iteracion: i + 1,
-          Y1j,
-          Y2j,
-          operacion,
-          Xj,
-          resultado,
-          Rj
-        };
-        degeneracionEncontrada = true;
-
-        // Marcar la fila como degenerada
-        this.resultados.push({
-          iteracion: i + 1,
-          Y1j,
-          Y2j,
-          operacion,
-          Xj,
-          resultado,
-          Rj,
-          esDegenerado: true
-        });
-        break; // Detener iteraciones después de encontrar degeneración
-      }
-
-      numerosGenerados.add(Xj);
+    for (let i = 0; i < cantidadNumeros; i++) {
+      const producto = semilla1 * semilla2;
+      const productoStr = producto.toString().padStart(cantidadDigitos * 2, '0');
+      const inicio = Math.floor((productoStr.length - cantidadDigitos) / 2);
+      const resultado = parseInt(productoStr.substring(inicio, inicio + cantidadDigitos), 10);
 
       this.resultados.push({
         iteracion: i + 1,
-        Y1j,
-        Y2j,
-        operacion,
-        Xj,
+        semilla1,
+        semilla2,
+        operacion: `${semilla1} * ${semilla2} = ${producto}`,
+        producto,
         resultado,
-        Rj,
-        esDegenerado: false
+        Rj: resultado / divisor
       });
+
+      semilla1 = semilla2;
+      semilla2 = resultado;
     }
   }
 
   limpiarCampos(): void {
-    this.form.reset({ semilla1: 0, semilla2: 0, digitos: 4, cantidad: 1 });
+    this.form.reset({ semilla1: 0, semilla2: 0, cantidad: 10 });
     this.resultados = [];
     this.mensajeError = '';
-    this.mostrarModal = false;
-    this.datosDegenerados = null;
   }
 }
-
-

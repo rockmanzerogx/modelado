@@ -1,92 +1,61 @@
 <div>
   <h2>Generador de Números Aleatorios (Productos Medios)</h2>
   <form [formGroup]="form" (ngSubmit)="calcularNumeros()">
+    <!-- Campo para la primera semilla -->
     <label for="semilla1">Semilla 1:</label>
     <input id="semilla1" type="number" formControlName="semilla1" />
     <div *ngIf="form.controls['semilla1'].hasError('min')" class="error">
       La semilla 1 no puede ser un número negativo.
     </div>
 
+    <!-- Campo para la segunda semilla -->
     <label for="semilla2">Semilla 2:</label>
     <input id="semilla2" type="number" formControlName="semilla2" />
     <div *ngIf="form.controls['semilla2'].hasError('min')" class="error">
       La semilla 2 no puede ser un número negativo.
     </div>
-
-    <label for="digitos">Cantidad de dígitos centrales:</label>
-    <input id="digitos" type="number" formControlName="digitos" />
-    <div *ngIf="form.controls['digitos'].hasError('min')" class="error">
-      La cantidad de dígitos centrales debe ser mayor o igual a 3.
+    <div *ngIf="form.errors && form.errors['longitudNoCoincide']" class="error">
+      Las semillas deben tener la misma cantidad de dígitos.
     </div>
 
-    <label for="cantidad">Cantidad de números a generar:</label>
+    <!-- Campo para la cantidad de números a generar -->
+    <label for="cantidad">Cantidad de números:</label>
     <input id="cantidad" type="number" formControlName="cantidad" />
     <div *ngIf="form.controls['cantidad'].hasError('min')" class="error">
       La cantidad de números debe ser al menos 1.
     </div>
 
+    <!-- Botones -->
     <button type="submit">Calcular</button>
     <button type="button" (click)="limpiarCampos()">Limpiar</button>
   </form>
 
+  <!-- Tabla de resultados -->
   <div *ngIf="resultados.length > 0" class="table-container">
     <h3>Resultados:</h3>
     <table>
       <thead>
         <tr>
           <th>Iteración</th>
-          <th>Y<sub>1j</sub></th>
-          <th>Y<sub>2j</sub></th>
+          <th>Semilla 1</th>
+          <th>Semilla 2</th>
           <th>Operación</th>
-          <th>X<sub>j</sub></th>
+          <th>Producto</th>
           <th>Resultado</th>
           <th>R<sub>j</sub></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let resultado of resultados" [class.degenerado]="resultado.esDegenerado">
+        <tr *ngFor="let resultado of resultados">
           <td>{{ resultado.iteracion }}</td>
-          <td>{{ resultado.Y1j }}</td>
-          <td>{{ resultado.Y2j }}</td>
+          <td>{{ resultado.semilla1 }}</td>
+          <td>{{ resultado.semilla2 }}</td>
           <td>{{ resultado.operacion }}</td>
-          <td>{{ resultado.Xj }}</td>
+          <td>{{ resultado.producto }}</td>
           <td>{{ resultado.resultado }}</td>
           <td>{{ resultado.Rj | number:'1.4-4' }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <!-- Modal para mostrar datos de degeneración -->
-  <div *ngIf="mostrarModal" class="modal">
-    <div class="modal-content">
-      <h3>Degeneración Detectada</h3>
-      <p>La serie se degeneró en la iteración {{ datosDegenerados.iteracion }}.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Iteración</th>
-            <th>Y<sub>1j</sub></th>
-            <th>Y<sub>2j</sub></th>
-            <th>Operación</th>
-            <th>X<sub>j</sub></th>
-            <th>Resultado</th>
-            <th>R<sub>j</sub></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ datosDegenerados.iteracion }}</td>
-            <td>{{ datosDegenerados.Y1j }}</td>
-            <td>{{ datosDegenerados.Y2j }}</td>
-            <td>{{ datosDegenerados.operacion }}</td>
-            <td>{{ datosDegenerados.Xj }}</td>
-            <td>{{ datosDegenerados.resultado }}</td>
-            <td>{{ datosDegenerados.Rj | number:'1.4-4' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button (click)="mostrarModal = false">Cerrar</button>
-    </div>
   </div>
 </div>
