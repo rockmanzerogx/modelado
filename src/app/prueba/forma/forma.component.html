@@ -1,0 +1,49 @@
+<h2>Prueba de Forma</h2>
+<input type="file" (change)="cargarExcel($event)" />
+<br /><br />
+<label for="columna">Selecciona la columna a trabajar:</label>
+<input 
+  id="columna" 
+  type="number" 
+  [(ngModel)]="columnaSeleccionada" 
+  (change)="actualizarColumna()" 
+/>
+<br /><br />
+<label for="decimales">Número de decimales:</label>
+<input 
+  id="decimales" 
+  type="number" 
+  [(ngModel)]="decimales" 
+/>
+<br /><br />
+<label for="confianza">Índice de confianza (entre 0 y 1):</label>
+<input 
+  id="confianza" 
+  type="number" 
+  step="0.01" 
+  [(ngModel)]="indiceConfianza" 
+/>
+<br /><br />
+<button mat-raised-button color="primary" (click)="pruebaDeForma()">Calcular Varianza</button>
+<h3>Datos de la columna seleccionada y ordenados:</h3>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Fila</th>
+      <th>Valor</th>
+      <th>Ordenados</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dato of datosColumna; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ dato.toFixed(decimales) }}</td>
+      <td>
+        <ng-container *ngIf="datosOrdenados.length > i">
+          {{ datosOrdenados[i].toFixed(decimales) }}
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

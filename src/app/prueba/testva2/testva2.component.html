@@ -1,0 +1,46 @@
+<div>
+    <h2>Ingrese los datos para graficar:</h2>
+    <form>
+      <div>
+        <label for="numPares">Cantidad de pares ordenados:</label>
+        <input id="numPares" type="number" min="1" max="5" [(ngModel)]="numPares" name="numPares" (ngModelChange)="actualizarPuntos()">
+      </div>
+      <div *ngFor="let punto of puntos; let i = index">
+        <label>X{{i+1}}:</label>
+        <input type="text" [(ngModel)]="puntos[i].x" name="x{{i}}">
+        <label>Y{{i+1}}:</label>
+        <input type="text" [(ngModel)]="puntos[i].y" name="y{{i}}">
+      </div>
+      <button type="button" (click)="generarGrafico()">Graficar</button>
+    </form>
+  </div>
+  
+  <div>
+        <canvas #chartCanvas width="400" height="400"></canvas>
+  </div>
+
+  <div *ngIf="ecuacionRecta">
+  <h3>Ecuación de la recta (usando los dos primeros puntos):</h3>
+  <div style="font-size:1.2em; margin-bottom: 10px;">
+    <span>{{ ecuacionRecta }}</span>
+  </div>
+  <div>
+    <span>Desarrollo:</span>
+    <div style="background:#f8f8f8;padding:10px;border-radius:5px;">
+      <span [innerHTML]="procesoRecta"></span>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let ecuacion of ecuacionesRecta; let i = index">
+  <h3>Ecuación de la recta {{i+1}} (usando los puntos {{i+1}} y {{i+2}}):</h3>
+  <div style="font-size:1.2em; margin-bottom: 10px;">
+    <span [innerHTML]="ecuacion"></span>
+  </div>
+  <div>
+    <span>Desarrollo:</span>
+    <div style="background:#f8f8f8;padding:10px;border-radius:5px;">
+      <span [innerHTML]="procesosRecta[i]"></span>
+    </div>
+  </div>
+</div>

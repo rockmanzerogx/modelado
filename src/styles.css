@@ -79,4 +79,17 @@
     box-sizing: border-box;
     width: 100%;
     padding: .5rem;
-  }
+  }body.dark-mode {
+  background-color: #181818;
+  color: #f1f1f1;
+}
+
+body.dark-mode .main {
+  background-color: #232323;
+}
+
+body.dark-mode .button {
+  background-color: #333;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}

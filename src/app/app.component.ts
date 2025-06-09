@@ -27,5 +27,7 @@ export class AppComponent {
   submitCuadrado(semilla: string, numero: string) {
     console.log(`Semilla: ${semilla}, Numero: ${numero}`);
   }
-
+  toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
 }

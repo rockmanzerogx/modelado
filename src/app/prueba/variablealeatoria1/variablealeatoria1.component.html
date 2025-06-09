@@ -3,32 +3,32 @@
     <form>
       <div>
         <label for="x1">X1:</label>
-        <input id="x1" type="number" [(ngModel)]="x1" name="x1">
+        <input id="x1" type="text" step="any" [(ngModel)]="x1" name="x1">
       </div>
       <div>
         <label for="y1">Y1:</label>
-        <input id="y1" type="number" [(ngModel)]="y1" name="y1">
+        <input id="y1" type="text" step="any" [(ngModel)]="y1" name="y1">
       </div>
       <div>
         <label for="x2">X2:</label>
-        <input id="x2" type="number" [(ngModel)]="x2" name="x2">
+        <input id="x2" type="text" step="any" [(ngModel)]="x2" name="x2">
       </div>
       <div>
         <label for="y2">Y2:</label>
-        <input id="y2" type="number" [(ngModel)]="y2" name="y2">
+        <input id="y2" type="text" step="any" [(ngModel)]="y2" name="y2">
       </div>
       <div>
         <label for="x3">X3:</label>
-        <input id="x3" type="number" [(ngModel)]="x3" name="x3">
+        <input id="x3" type="text" step="any" [(ngModel)]="x3" name="x3">
       </div>
       <div>
         <label for="y3">Y3:</label>
-        <input id="y3" type="number" [(ngModel)]="y3" name="y3">
+        <input id="y3" type="text" step="any" [(ngModel)]="y3" name="y3">
       </div>
       <button type="button" (click)="generarGrafico()">Graficar</button>
     </form>
   </div>
   
   <div>
-    <canvas id="chart"></canvas>
+        <canvas #chartCanvas width="400" height="400"></canvas>
   </div>

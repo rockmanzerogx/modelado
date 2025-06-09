@@ -1,5 +1,8 @@
 <main class="main">
   <h1>Generador de Numeros Aleatorios</h1>
+  <button class="button" (click)="toggleDarkMode()" style="float:right; margin: 10px;">
+    Cambiar modo oscuro
+  </button>
   <nav>
     <a class="button"
        routerLink="/cuadrado"
@@ -32,6 +35,12 @@
       Medias
     </a>|
     <a class="button"
+       routerLink="/varianza"
+       routerLinkActive="activebutton"
+       ariaCurrentWhenActive="page">
+      Varianza
+    </a>
+    <a class="button"
        routerLink="/tablanormal"
        routerLinkActive="activebutton"
        ariaCurrentWhenActive="page">
@@ -48,6 +57,18 @@
        routerLinkActive="activebutton"
        ariaCurrentWhenActive="page">
       Prueba de series
+    </a>|
+    <a class="button"
+       routerLink="/forma"
+       routerLinkActive="activebutton"
+       ariaCurrentWhenActive="page">
+      Prueba de Forma
+    </a>
+    <a class="button"
+       routerLink="/test"
+       routerLinkActive="activebutton"
+       ariaCurrentWhenActive="page">
+      test
     </a>
   </nav>
 
